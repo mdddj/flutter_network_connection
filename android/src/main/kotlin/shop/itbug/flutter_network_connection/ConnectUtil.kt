@@ -1,13 +1,13 @@
 package shop.itbug.flutter_network_connection
 
 import android.content.Context
-import android.util.Log
 import com.facebook.network.connectionclass.ConnectionClassManager
 import com.facebook.network.connectionclass.DeviceBandwidthSampler
 import fairy.easy.httpmodel.model.HttpNormalUrlLoader
 
 import fairy.easy.httpmodel.HttpModelHelper
 import fairy.easy.httpmodel.resource.HttpListener
+import fairy.easy.httpmodel.resource.HttpType
 
 
 /**
@@ -51,7 +51,6 @@ class ConnectUtil {
      * 开始检测
      */
     fun start(address: String, context: Context, httpListener: HttpListener) {
-//        Log.i("ConnectUtil","开始检测:$address")
         HttpModelHelper.getInstance()
                 .init(context)
                 .setChina(true)
@@ -63,5 +62,35 @@ class ConnectUtil {
 
 
     }
+
+    /**
+     * 开始检测
+     * 根据type 类型
+     */
+    fun startWithType(address: String, context: Context, httpListener: HttpListener, typeString: String) {
+
+        val type: HttpType = when (typeString) {
+            "Index" -> HttpType.INDEX
+            "Ping" -> HttpType.PING
+            "Http" -> HttpType.HTTP
+            "Host" -> HttpType.HOST
+            "PortScan" -> HttpType.PORT_SCAN
+            "MtuScan" -> HttpType.MTU_SCAN
+            "TraceRoute" -> HttpType.TRACE_ROUTE
+            "NsLookup" -> HttpType.NSLOOKUP
+            "Net" -> HttpType.NET
+            else -> HttpType.PING
+        }
+
+        HttpModelHelper.getInstance()
+                .init(context)
+                .setChina(true)
+                .setModelLoader(HttpNormalUrlLoader())
+                .setFactory()
+                .addType(type)
+                .build()
+                .startAsync(address, httpListener)
+    }
+
 
 }
