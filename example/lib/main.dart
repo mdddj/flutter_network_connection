@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
                   child: Text('测速'),
                 ),
                 TextButton(onPressed: (){
-                  FlutterNetworkConnection.start('http://luker.tech/admin');
+                  FlutterNetworkConnection.instance.start('http://luker.tech/admin');
                 }, child: Text('开始检测'))
               ],
             ),
