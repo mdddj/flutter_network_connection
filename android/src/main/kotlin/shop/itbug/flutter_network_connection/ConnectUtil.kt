@@ -51,10 +51,10 @@ class ConnectUtil {
      * 开始检测
      */
     fun start(address: String, context: Context, httpListener: HttpListener) {
-        Log.i("ConnectUtil","开始检测:$address")
+//        Log.i("ConnectUtil","开始检测:$address")
         HttpModelHelper.getInstance()
                 .init(context)
-                .setChina(false)
+                .setChina(true)
                 .setModelLoader(HttpNormalUrlLoader())
                 .setFactory()
                 .addAll()

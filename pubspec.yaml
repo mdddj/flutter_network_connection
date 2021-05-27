@@ -1,7 +1,7 @@
 name: flutter_network_connection
 description: flutter 检测网络速度
 version: 0.0.1
-homepage:
+homepage: https://github.com/mdddj/flutter_network_connection
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

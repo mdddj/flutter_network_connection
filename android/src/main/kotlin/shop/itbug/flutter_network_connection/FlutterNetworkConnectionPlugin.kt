@@ -3,6 +3,7 @@ package shop.itbug.flutter_network_connection
 import android.content.Context
 import android.util.Log
 import androidx.annotation.NonNull
+import com.google.gson.Gson
 import fairy.easy.httpmodel.resource.HttpListener
 import fairy.easy.httpmodel.resource.HttpType
 
@@ -34,6 +35,7 @@ class FlutterNetworkConnectionPlugin : FlutterPlugin, MethodCallHandler {
                     sink = events
                 }
             }
+
             override fun onCancel(arguments: Any?) {
             }
         })
@@ -49,23 +51,35 @@ class FlutterNetworkConnectionPlugin : FlutterPlugin, MethodCallHandler {
                 util.start(
                         address, context,
                         object : HttpListener {
-                            /// 检测成功
+                            /// 扫描成功
                             override fun onSuccess(httpType: HttpType?, result: JSONObject?) {
-                                Log.d(tag, "onSuccess类型：${httpType.toString()}")
-                                Log.d(tag, "onSuccess返回数据：${result.toString()}")
+                                val map = mutableMapOf<String, String>()
+                                map["type"] = httpType.toString()
+                                map["data"] = result.toString()
+                                map["status"] = "success"
+                                val json = Gson().toJson(map)
+                                sink.success(json)
                             }
 
 
+                            /// 开始检测失败
                             override fun onFail(data: String?) {
-                                Log.e(tag, "onFail:扫描失败：$data")
+//                                Log.e(tag, "onFail:扫描失败：$data")
+                                result.error("10002", data, "检测失败:$data")
                             }
 
+                            /// 结束扫描
                             override fun onFinish(result: JSONObject?) {
-                                Log.d(tag, "onFinish：${result.toString()}")
+                                val map = mutableMapOf<String, String>()
+                                map["type"] = "finish"
+                                map["data"] = result.toString()
+                                map["status"] = "finish"
+                                val json = Gson().toJson(map)
+                                sink.success(json)
+                                sink.endOfStream()
                             }
                         }
                 )
-                result.success("开启检测成功")
             } else {
                 result.error("10001", "请输入测试地址", "address 参数为null ")
             }

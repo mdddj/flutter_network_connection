@@ -39,5 +39,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.facebook.network.connectionclass:connectionclass:1.0.1'
     implementation group: 'fairy.easy', name: 'httpmodel', version: '1.0.5'
-
+    implementation 'com.google.code.gson:gson:2.8.6'
 }

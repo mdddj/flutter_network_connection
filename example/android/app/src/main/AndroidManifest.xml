@@ -2,6 +2,7 @@
     package="shop.itbug.flutter_network_connection_example">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
    <application
         android:label="flutter_network_connection_example"
         android:icon="@mipmap/ic_launcher">
