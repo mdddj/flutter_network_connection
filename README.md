@@ -9,7 +9,7 @@ flutter 检测网络速度
 ![](https://badgen.net/pub/v/flutter_network_connection) [flutter_network_connection](https://pub.dev/packages/flutter_network_connection)
 
 ```dart
-  flutter_network_connection: ^0.0.4
+  flutter_network_connection: ^last_version
 
 ```
 
