@@ -4,6 +4,8 @@ version '1.0-SNAPSHOT'
 buildscript {
     ext.kotlin_version = '1.7.20'
     repositories {
+        google()
+        mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven {
@@ -24,6 +26,8 @@ buildscript {
 
 rootProject.allprojects {
     repositories {
+        google()
+        mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven {
